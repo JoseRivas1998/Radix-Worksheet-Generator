@@ -16,3 +16,14 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20160810'
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
 }
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.tcg.radixworksheetgenerator.Main'
+    }
+
+    baseName = 'Radix-Worksheet-Generator'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+
+}
